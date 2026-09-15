@@ -5,6 +5,7 @@ use crate::{
     switcher::{decision::DecisionList, SwitcherState},
     ui::application_ui,
 };
+use ks_common_ui::style::load_fonts;
 
 /// We derive Deserialize/Serialize so we can persist app state on shutdown.
 #[derive(serde::Deserialize, serde::Serialize, Default, Debug)]
@@ -30,11 +31,16 @@ impl VMiksApp {
 
         // Load previous app state (if any).
         // Note that you must enable the `persistence` feature for this to work.
-        if let Some(storage) = cc.storage {
+        let a: VMiksApp = if let Some(storage) = cc.storage {
             eframe::get_value(storage, eframe::APP_KEY).unwrap_or_default()
         } else {
             Default::default()
-        }
+        };
+
+        let mut ctx = cc.egui_ctx.clone();
+        ks_common_ui::style::load_fonts(&mut ctx);
+
+        a
     }
 }
 

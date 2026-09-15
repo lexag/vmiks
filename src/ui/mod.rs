@@ -1,4 +1,7 @@
-use crate::{app::VMiksApp, ui::cameras::cameras_window};
+use crate::{
+    app::VMiksApp,
+    ui::{cameras::cameras_window, control::control_bar},
+};
 
 mod cameras;
 mod control;
@@ -32,7 +35,12 @@ pub fn application_ui(ctx: &egui::Context, frame: &mut eframe::Frame, app: &mut 
 
     cameras_window(app, ctx);
 
+    app.playback
+        .report_delta_time(ctx.input(|i| i.stable_dt as f64));
+
+    ctx.request_repaint();
+
     egui::CentralPanel::default().show(ctx, |ui| {
-        ui.with_layout(egui::Layout::bottom_up(egui::Align::LEFT), |ui| {});
+        control_bar(app, ui);
     });
 }
