@@ -1,2 +1,2 @@
-#[derive(Debug, Default)]
+#[derive(Debug, Default, serde::Serialize, serde::Deserialize)]
 pub struct DecisionList {}
