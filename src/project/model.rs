@@ -3,22 +3,22 @@ use std::path::PathBuf;
 
 #[derive(Debug, Default, serde::Serialize, serde::Deserialize)]
 pub struct Project {
-    version: u64,
-    metadata: ProjectMetadata,
-    cameras: Vec<Camera>,
-    decisions: DecisionList,
+    pub version: u64,
+    pub metadata: ProjectMetadata,
+    pub cameras: Vec<Camera>,
+    pub decisions: DecisionList,
 }
 
 #[derive(Debug, Default, serde::Serialize, serde::Deserialize)]
 pub struct ProjectMetadata {
-    name: String,
-    duration: f64,
+    pub name: String,
+    pub duration: f64,
 }
 
 #[derive(Debug, Default, serde::Serialize, serde::Deserialize)]
 pub struct Camera {
-    id: String,
-    name: String,
-    path: PathBuf,
-    offset: f64,
+    pub id: String,
+    pub name: String,
+    pub path: PathBuf,
+    pub offset: f64,
 }

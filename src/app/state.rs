@@ -1,7 +1,9 @@
 use crate::{
+    app::windows::Windows,
     playback::PlaybackState,
     project::Project,
     switcher::{decision::DecisionList, SwitcherState},
+    ui::application_ui,
 };
 
 /// We derive Deserialize/Serialize so we can persist app state on shutdown.
@@ -9,13 +11,15 @@ use crate::{
 #[serde(default)] // if we add new fields, give them default values when deserializing old state
 pub struct VMiksApp {
     #[serde(skip)]
-    project: Option<Project>,
+    pub project: Project,
     #[serde(skip)]
-    playback: PlaybackState,
+    pub playback: PlaybackState,
     #[serde(skip)]
-    switcher: SwitcherState,
+    pub switcher: SwitcherState,
     #[serde(skip)]
-    decisions: DecisionList,
+    pub decisions: DecisionList,
+
+    pub windows: Windows,
 }
 
 impl VMiksApp {
@@ -31,5 +35,16 @@ impl VMiksApp {
         } else {
             Default::default()
         }
+    }
+}
+
+impl eframe::App for VMiksApp {
+    /// Called by the framework to save state before shutdown.
+    fn save(&mut self, storage: &mut dyn eframe::Storage) {
+        eframe::set_value(storage, eframe::APP_KEY, self);
+    }
+
+    fn update(&mut self, ctx: &egui::Context, frame: &mut eframe::Frame) {
+        application_ui(ctx, frame, self);
     }
 }
