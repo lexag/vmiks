@@ -1,6 +1,6 @@
 use crate::{
     app::VMiksApp,
-    ui::{cameras::cameras_window, control::control_bar, multiview::multiview},
+    ui::{cameras::cameras_window, control::control_bar, multiview::multiview, program::program},
 };
 
 mod cameras;
@@ -42,6 +42,7 @@ pub fn application_ui(ctx: &egui::Context, frame: &mut eframe::Frame, app: &mut 
 
     egui::CentralPanel::default().show(ctx, |ui| {
         ui.vertical(|ui| {
+            //program(app, ui);
             multiview(app, ui);
             control_bar(app, ui);
         });

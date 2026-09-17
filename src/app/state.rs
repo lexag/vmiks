@@ -63,6 +63,7 @@ impl eframe::App for VMiksApp {
     }
 
     fn update(&mut self, ctx: &egui::Context, frame: &mut eframe::Frame) {
+        self.switcher.update(ctx);
         application_ui(ctx, frame, self);
     }
 }
