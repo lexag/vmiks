@@ -8,7 +8,7 @@ use crate::{
 use ks_common_ui::style::load_fonts;
 
 /// We derive Deserialize/Serialize so we can persist app state on shutdown.
-#[derive(serde::Deserialize, serde::Serialize, Default, Debug)]
+#[derive(serde::Deserialize, serde::Serialize)]
 #[serde(default)] // if we add new fields, give them default values when deserializing old state
 pub struct VMiksApp {
     #[serde(skip)]
@@ -21,6 +21,18 @@ pub struct VMiksApp {
     pub decisions: DecisionList,
 
     pub windows: Windows,
+}
+
+impl Default for VMiksApp {
+    fn default() -> Self {
+        Self {
+            project: Default::default(),
+            playback: Default::default(),
+            switcher: Default::default(),
+            decisions: Default::default(),
+            windows: Default::default(),
+        }
+    }
 }
 
 impl VMiksApp {

@@ -1,19 +1,28 @@
 use gstreamer::glib;
 
+#[derive(Debug)]
 pub enum MiksError {
-    DecoderError,
-    DecoderStateChangeError(gstreamer::StateChangeError),
-    GlibError(glib::Error),
+    Decoder,
+    DecoderStateChange(gstreamer::StateChangeError),
+    Glib(glib::Error),
+    GlibBool(glib::BoolError),
+    OptionNone,
 }
 
 impl From<glib::Error> for MiksError {
     fn from(value: glib::Error) -> Self {
-        Self::GlibError(value)
+        Self::Glib(value)
     }
 }
 
 impl From<gstreamer::StateChangeError> for MiksError {
     fn from(value: gstreamer::StateChangeError) -> Self {
-        Self::DecoderStateChangeError(value)
+        Self::DecoderStateChange(value)
+    }
+}
+
+impl From<glib::BoolError> for MiksError {
+    fn from(value: glib::BoolError) -> Self {
+        Self::GlibBool(value)
     }
 }

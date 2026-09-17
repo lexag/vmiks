@@ -6,7 +6,10 @@ edition = "2024"
 [dependencies]
 eframe = { version = "0.33.3", features = ["persistence"] }
 egui = "0.33.3"
-gstreamer = "0.25.3"
+gstreamer = "0.25.2"
+gstreamer-app = "0.25.2"
+gstreamer-video = "0.25.3"
+image = "0.25.10"
 ks-common-generic = { git = "https://github.com/lexag/ks-common" }
 ks-common-ui = { git = "https://github.com/lexag/ks-common" }
 serde = { version = "1.0.229", features = ["derive"] }

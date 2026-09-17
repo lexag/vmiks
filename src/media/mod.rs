@@ -1,3 +1,3 @@
-mod decoder;
-mod frame;
-mod source;
+pub mod decoder;
+pub mod frame;
+pub mod source;

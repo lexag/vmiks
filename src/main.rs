@@ -19,6 +19,9 @@ fn main() -> eframe::Result {
             .with_min_inner_size([300.0, 220.0]),
         ..Default::default()
     };
+    if gstreamer::init().is_err() {
+        return Ok(());
+    };
     eframe::run_native(
         "eframe template",
         native_options,
