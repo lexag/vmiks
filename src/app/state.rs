@@ -17,8 +17,6 @@ pub struct VMiksApp {
     pub playback: PlaybackState,
     #[serde(skip)]
     pub switcher: SwitcherState,
-    #[serde(skip)]
-    pub decisions: DecisionList,
 
     pub windows: Windows,
 }
@@ -29,7 +27,6 @@ impl Default for VMiksApp {
             project: Default::default(),
             playback: Default::default(),
             switcher: Default::default(),
-            decisions: Default::default(),
             windows: Default::default(),
         }
     }
@@ -63,7 +60,7 @@ impl eframe::App for VMiksApp {
     }
 
     fn update(&mut self, ctx: &egui::Context, frame: &mut eframe::Frame) {
-        self.switcher.update(ctx);
+        self.switcher.update(ctx, &mut self.project, &self.playback);
         application_ui(ctx, frame, self);
     }
 }
